@@ -39,6 +39,14 @@ function Dashboard() {
     localStorage.removeItem("token");
     navigate("/");
   };
+  const handleEdit = async (id, title) => {
+
+  await updateTask(id, {
+    title
+  });
+
+  fetchTasks();
+};
   return (
     <div className="max-w-xl mx-auto bg-white p-6 rounded shadow mt-10">
       <div className="max-w-xl mx-auto">
@@ -64,6 +72,7 @@ function Dashboard() {
           tasks={tasks}
           onDelete={handleDelete}
           onToggle={handleToggle}
+          onEdit={handleEdit}
         />
 
       </div>
