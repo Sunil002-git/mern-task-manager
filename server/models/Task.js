@@ -10,12 +10,24 @@ const taskSchema = new mongoose.Schema(
       type: Boolean,
       default: false
     },
-    user: {
+
+    team: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Team",
+      required: true
+    },
+    assignedTo: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true
     }
-  },
+
+    // user: {
+    //   type: mongoose.Schema.Types.ObjectId,
+    //   ref: "User",
+    //   required: true
+    //   }
+    },
   { timestamps: true }
 );
 

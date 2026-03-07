@@ -3,11 +3,13 @@ const Task = require("../models/Task");
 exports.createTask = async (req, res) => {
   try {
 
-    const { title } = req.body;
+    const { title, teamId, assignedTo } = req.body;
 
     const task = await Task.create({
       title,
-      user: req.user.id
+      team: teamId,
+    //   user: req.user.id
+      assignedTo  
     });
 
     res.status(201).json(task);
@@ -61,4 +63,17 @@ exports.deleteTask = async (req, res) => {
     }catch (error) {
     res.status(500).json({ error: error.message });
   }
+};
+
+exports.getTeamTasks = async (req, res) => {
+    try {
+        const tasks =await Task.find({
+            team: req.params.teamId
+        })
+        .populate("assignedTo", "name email");
+
+        res.json(tasks);
+    } catch(error) {
+        res.status(500).json({ error: error.message}); 
+    }
 };
