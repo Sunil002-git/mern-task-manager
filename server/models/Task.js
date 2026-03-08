@@ -1,34 +1,39 @@
 const mongoose = require("mongoose");
 
-const taskSchema = new mongoose.Schema(
-  {
-    title: {
-      type: String,
-      required: [true, "Task title is required"]
-    },
-    completed: {
-      type: Boolean,
-      default: false
-    },
+const taskSchema = new mongoose.Schema({
 
-    team: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Team",
-      required: true
-    },
-    assignedTo: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-      required: true
-    }
+  title: {
+    type: String,
+    required: true
+  },
 
-    // user: {
-    //   type: mongoose.Schema.Types.ObjectId,
-    //   ref: "User",
-    //   required: true
-    //   }
-    },
-  { timestamps: true }
-);
+  team: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Team"
+  },
+
+  assignedTo: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User"
+  },
+
+  createdBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User"
+  },
+
+  status: {
+    type: String,
+    default: "Pending"
+  },
+
+  completedBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User"
+  },
+
+  completedAt: Date
+
+}, { timestamps: true });
 
 module.exports = mongoose.model("Task", taskSchema);

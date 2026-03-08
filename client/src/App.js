@@ -6,7 +6,8 @@ import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import Teams from "./pages/Teams";
 import TeamTasks from "./pages/TeamTasks";
-import ProtectedRoute from './components/ProtectedRoute';
+import About from "./pages/About";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 
 function App() {
@@ -15,11 +16,22 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/register" element={ <Register />} />
-        <Route path="/dashboard" element={
+        <Route
+          path="/about"
+          element={
           <ProtectedRoute>
-             <Dashboard />
+            <About />
           </ProtectedRoute>
-         } />
+            }
+          />
+                  <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          />
          <Route path="/teams" element={
             <ProtectedRoute>
               <Teams />

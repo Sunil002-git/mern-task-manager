@@ -13,7 +13,7 @@ function Login() {
                 password
             });
             localStorage.setItem("token", res.data.token);
-            navigate("/teams");
+            navigate("/dashboard");
         }catch (error) {
             console.log(error);
 

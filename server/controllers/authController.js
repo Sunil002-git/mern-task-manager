@@ -58,3 +58,27 @@ exports.loginUser = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 };
+
+exports.getUsers = async (req, res) => {
+  try {
+
+    const users = await User.find().select("name email");
+
+    res.json(users);
+
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+exports.getCurrentUser = async (req, res) => {
+  try {
+
+    const user = await User.findById(req.user.id).select("name email");
+
+    res.json(user);
+
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
